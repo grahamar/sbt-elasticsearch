@@ -20,12 +20,23 @@ class ElasticsearchServer(
       .withSetting(PopularProperties.CLUSTER_NAME, clusterName)
 
     indexConf.foreach { index =>
+      val indexSettings = IndexSettings.builder()
+      index.types.map { t =>
+        indexSettings.withType(t.name, FileUtils.readFileToString(t.mappingJsonFile, "UTF-8"))
+      }
+
       index.settingsJsonFile match {
         case Some(settingsFile) => elastic.withIndex(
           index.name,
-          IndexSettings.builder().withSettings(FileUtils.readFileToString(settingsFile, "UTF-8")).build()
+          indexSettings.withSettings(FileUtils.readFileToString(settingsFile, "UTF-8")).build()
         )
-        case None => elastic.withIndex(index.name)
+
+        case None =>
+          if(index.types.isEmpty) {
+            elastic.withIndex(index.name)
+          } else {
+            elastic.withIndex(index.name, indexSettings.build())
+          }
       }
     }
 
