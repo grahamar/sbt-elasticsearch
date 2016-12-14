@@ -6,7 +6,7 @@ import sbt._
 
 object ElasticsearchKeys {
 
-  case class IndexConf(name: String, settingsJsonFile: File)
+  case class IndexConf(name: String, settingsJsonFile: Option[File])
 
   lazy val elasticsearchClusterName = settingKey[String]("The name of the elasticsearch cluster. Defaults to 'elasticsearch'")
   lazy val elasticsearchUrl = settingKey[Option[String]]("The URL to download elasticsearch from.")
