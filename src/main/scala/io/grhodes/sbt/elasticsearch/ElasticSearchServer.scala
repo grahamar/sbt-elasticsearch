@@ -16,7 +16,7 @@ class ElasticSearchServer(clusterName: String, dataDir: File) {
     .put("cluster.name", clusterName)
     .build
 
-  private lazy val node = nodeBuilder().local(true).settings(settings).build
+  private lazy val node = nodeBuilder().settings(settings).build
   val client: Client = node.client
 
   def start(streams: TaskStreams): Unit = {
