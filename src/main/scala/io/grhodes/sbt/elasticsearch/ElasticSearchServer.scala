@@ -1,40 +1,29 @@
 package io.grhodes.sbt.elasticsearch
 
-import java.io.File
+import java.net.URL
 
-import org.apache.commons.io.FileUtils
-import org.elasticsearch.client.Client
-import org.elasticsearch.common.settings.Settings
-import org.elasticsearch.node.NodeBuilder._
-import sbt.Keys.TaskStreams
+import io.grhodes.sbt.elasticsearch.ElasticsearchKeys.IndexConf
+import pl.allegro.tech.embeddedelasticsearch.{EmbeddedElastic, PopularProperties}
 
-class ElasticSearchServer(clusterName: String, dataDir: File) {
+class ElasticsearchServer(
+  clusterName: String,
+  version: String,
+  downloadUrl: Option[String],
+  indexConf: Seq[IndexConf]
+) {
+  private val Instance = EmbeddedElastic.builder()
+    .withElasticVersion(version)
+    .withDownloadUrl(downloadUrl.map(new URL(_)).getOrElse(ElasticDownloadUrlUtils.urlFromVersion(version)))
+    .withSetting(PopularProperties.TRANSPORT_TCP_PORT, 9300)
+    .withSetting(PopularProperties.CLUSTER_NAME, clusterName)
+    .build()
 
-  private val settings = Settings.settingsBuilder
-    .put("path.data", dataDir.toString)
-    .put("path.home", dataDir.getParentFile.toString)
-    .put("cluster.name", clusterName)
-    .build
-
-  private lazy val node = nodeBuilder().settings(settings).build
-  val client: Client = node.client
-
-  def start(streams: TaskStreams): Unit = {
-    streams.log.info("Starting Elasticsearch test node...")
-    node.start()
-    streams.log.info("Elasticsearch test node started!")
+  def start() = {
+    Instance.start()
   }
 
-  def stop(streams: TaskStreams): Unit = {
-    streams.log.info("Stopping Elasticsearch test node...")
-    node.close()
-
-    try {
-      FileUtils.forceDelete(dataDir)
-    } catch {
-      case e: Exception => // dataDir cleanup failed
-    }
-    streams.log.info("Elasticsearch test node stopped!")
+  def stop() = {
+    Instance.stop()
   }
 
 }
