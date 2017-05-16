@@ -14,7 +14,7 @@ object ElasticsearchKeys {
   lazy val elasticsearchVersion = settingKey[String]("The version of elasticsearch. Defaults to '2.3.4'")
 
   lazy val indexConf = settingKey[Seq[IndexConf]]("IndexConfs to initialize indexes on startup. No indexes are created by default. IndexConf(name, settingsJsonFile)")
-  lazy val plugins = settingKey[Seq[String]]("Plugins to initialize on startup.")
+  lazy val pluginConf = settingKey[Seq[String]]("Plugins to initialize on startup.")
 
   lazy val startElasticsearch = TaskKey[Unit]("start-elasticsearch")
   lazy val stopElasticsearch = TaskKey[Unit]("stop-elasticsearch")
