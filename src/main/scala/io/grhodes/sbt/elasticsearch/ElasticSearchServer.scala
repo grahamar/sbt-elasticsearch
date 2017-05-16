@@ -10,7 +10,8 @@ class ElasticsearchServer(
   clusterName: String,
   version: String,
   downloadUrl: Option[String],
-  indexConf: Seq[IndexConf]
+  indexConf: Seq[IndexConf],
+  plugins: Seq[String]
 ) {
   private val Instance = {
     val elastic = EmbeddedElastic.builder()
@@ -18,6 +19,7 @@ class ElasticsearchServer(
       .withDownloadUrl(downloadUrl.map(new URL(_)).getOrElse(ElasticDownloadUrlUtils.urlFromVersion(version)))
       .withSetting(PopularProperties.TRANSPORT_TCP_PORT, 9300)
       .withSetting(PopularProperties.CLUSTER_NAME, clusterName)
+
 
     indexConf.foreach { index =>
       val indexSettings = IndexSettings.builder()
@@ -39,6 +41,8 @@ class ElasticsearchServer(
           }
       }
     }
+
+    plugins.foreach(elastic.withPlugin)
 
     elastic.build()
   }

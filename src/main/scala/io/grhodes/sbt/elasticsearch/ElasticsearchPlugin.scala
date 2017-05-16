@@ -16,12 +16,14 @@ object ElasticsearchPlugin extends AutoPlugin {
     elasticsearchUrl := None,
 
     indexConf := Seq(),
+    plugins := Seq(),
 
     _elasticsearchServer := new ElasticsearchServer(
       elasticsearchClusterName.value,
       elasticsearchVersion.value,
       elasticsearchUrl.value,
-      indexConf.value
+      indexConf.value,
+      plugins.value
     ),
 
     startElasticsearch := {
