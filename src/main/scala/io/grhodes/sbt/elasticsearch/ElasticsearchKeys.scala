@@ -12,7 +12,7 @@ object ElasticsearchKeys {
   lazy val elasticsearchClusterName = settingKey[String]("The name of the elasticsearch cluster. Defaults to 'elasticsearch'")
   lazy val elasticsearchUrl = settingKey[Option[String]]("The URL to download elasticsearch from.")
   lazy val elasticsearchVersion = settingKey[String]("The version of elasticsearch. Defaults to '2.3.4'")
-  lazy val elasticsearchHttpPort = settingKey[Int]("Elasticsearch HTTP port. Defaults to '80'")
+  lazy val elasticsearchHttpPort = settingKey[Int]("Elasticsearch HTTP port. Defaults to '9200'")
   lazy val elasticsearchTcpPort = settingKey[Int]("Elasticsearch TCP port. Defaults to '9300'")
 
   lazy val indexConf = settingKey[Seq[IndexConf]]("IndexConfs to initialize indexes on startup. No indexes are created by default. IndexConf(name, settingsJsonFile)")

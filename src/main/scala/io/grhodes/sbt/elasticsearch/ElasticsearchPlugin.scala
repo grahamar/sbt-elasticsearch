@@ -14,7 +14,7 @@ object ElasticsearchPlugin extends AutoPlugin {
     elasticsearchClusterName := "elasticsearch",
     elasticsearchVersion := "2.3.4",
     elasticsearchUrl := None,
-    elasticsearchHttpPort := 80,
+    elasticsearchHttpPort := 9200,
     elasticsearchTcpPort := 9300,
 
     indexConf := Seq(),
