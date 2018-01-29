@@ -14,5 +14,5 @@ bintrayRepository := "sbt-plugins"
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 libraryDependencies ++= Seq(
-  "pl.allegro.tech" % "embedded-elasticsearch" % "2.1.0"
+  "pl.allegro.tech" % "embedded-elasticsearch" % "2.4.3"
 )
