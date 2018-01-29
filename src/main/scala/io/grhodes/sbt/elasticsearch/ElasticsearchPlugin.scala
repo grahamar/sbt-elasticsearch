@@ -12,7 +12,7 @@ object ElasticsearchPlugin extends AutoPlugin {
 
   override val projectSettings = Seq(
     elasticsearchClusterName := "elasticsearch",
-    elasticsearchVersion := "2.3.4",
+    elasticsearchVersion := "6.1.2",
     elasticsearchUrl := None,
 
     indexConf := Seq(),

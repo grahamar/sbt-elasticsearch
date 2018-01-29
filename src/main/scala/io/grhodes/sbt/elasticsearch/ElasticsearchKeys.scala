@@ -11,7 +11,7 @@ object ElasticsearchKeys {
 
   lazy val elasticsearchClusterName = settingKey[String]("The name of the elasticsearch cluster. Defaults to 'elasticsearch'")
   lazy val elasticsearchUrl = settingKey[Option[String]]("The URL to download elasticsearch from.")
-  lazy val elasticsearchVersion = settingKey[String]("The version of elasticsearch. Defaults to '2.3.4'")
+  lazy val elasticsearchVersion = settingKey[String]("The version of elasticsearch. Defaults to '6.1.2'")
 
   lazy val indexConf = settingKey[Seq[IndexConf]]("IndexConfs to initialize indexes on startup. No indexes are created by default. IndexConf(name, settingsJsonFile)")
   lazy val pluginConf = settingKey[Seq[String]]("Plugins to initialize on startup.")
