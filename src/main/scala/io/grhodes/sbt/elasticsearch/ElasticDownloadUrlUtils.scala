@@ -9,7 +9,8 @@ private[elasticsearch] object ElasticDownloadUrlUtils {
   private val URLS = Map(
     "1." -> "https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-{VERSION}.zip",
     "2." -> "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/{VERSION}/elasticsearch-{VERSION}.zip",
-    "5." -> "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{VERSION}.zip"
+    "5." -> "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{VERSION}.zip",
+    "6." -> "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{VERSION}.zip"
   )
 
   def urlFromVersion(elasticVersion: String) = {
