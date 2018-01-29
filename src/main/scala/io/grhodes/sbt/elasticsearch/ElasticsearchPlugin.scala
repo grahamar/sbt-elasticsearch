@@ -13,7 +13,6 @@ object ElasticsearchPlugin extends AutoPlugin {
   override val projectSettings = Seq(
     elasticsearchClusterName := "elasticsearch",
     elasticsearchVersion := "6.1.2",
-    elasticsearchUrl := None,
     elasticsearchHttpPort := 9200,
     elasticsearchTcpPort := 9300,
 
@@ -23,7 +22,6 @@ object ElasticsearchPlugin extends AutoPlugin {
     _elasticsearchServer := new ElasticsearchServer(
       elasticsearchClusterName.value,
       elasticsearchVersion.value,
-      elasticsearchUrl.value,
       elasticsearchHttpPort.value,
       elasticsearchTcpPort.value,
       indexConf.value,

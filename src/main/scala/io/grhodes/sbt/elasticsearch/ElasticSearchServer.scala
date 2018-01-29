@@ -9,7 +9,6 @@ import pl.allegro.tech.embeddedelasticsearch.{EmbeddedElastic, IndexSettings, Po
 class ElasticsearchServer(
   clusterName: String,
   version: String,
-  downloadUrl: Option[String],
   httpPort: Int,
   tcpPort: Int,
   indexConf: Seq[IndexConf],
@@ -18,7 +17,6 @@ class ElasticsearchServer(
   private val Instance = {
     val elastic = EmbeddedElastic.builder()
       .withElasticVersion(version)
-      .withDownloadUrl(downloadUrl.map(new URL(_)).getOrElse(ElasticDownloadUrlUtils.urlFromVersion(version)))
       .withSetting(PopularProperties.HTTP_PORT, httpPort)
       .withSetting(PopularProperties.TRANSPORT_TCP_PORT, tcpPort)
       .withSetting(PopularProperties.CLUSTER_NAME, clusterName)
