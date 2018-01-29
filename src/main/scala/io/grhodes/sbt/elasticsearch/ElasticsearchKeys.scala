@@ -10,7 +10,6 @@ object ElasticsearchKeys {
   case class IndexConf(name: String, types: Seq[IndexType] = Seq.empty, settingsJsonFile: Option[File] = None)
 
   lazy val elasticsearchClusterName = settingKey[String]("The name of the elasticsearch cluster. Defaults to 'elasticsearch'")
-  lazy val elasticsearchUrl = settingKey[Option[String]]("The URL to download elasticsearch from.")
   lazy val elasticsearchVersion = settingKey[String]("The version of elasticsearch. Defaults to '6.1.2'")
   lazy val elasticsearchHttpPort = settingKey[Int]("Elasticsearch HTTP port. Defaults to '9200'")
   lazy val elasticsearchTcpPort = settingKey[Int]("Elasticsearch TCP port. Defaults to '9300'")
